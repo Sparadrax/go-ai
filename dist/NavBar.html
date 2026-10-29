@@ -1,0 +1,53 @@
+<!-- Shared website navigation: grouped site pages, personal content, and contact profiles. -->
+<link rel="stylesheet" href="/Theme.css?v=1">
+<link rel="stylesheet" href="/NavBar.css?v=20261026-copy-pointer">
+<header class="site-header">
+    <nav class="navbar navbar-expand-lg navbar-light container" aria-label="Main navigation">
+        <a class="navbar-brand" href="/index.html">Louis du Beux</a>
+        <button class="navbar-toggler" type="button" data-target="#site-navigation" aria-controls="site-navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="site-navigation">
+            <!-- Pin Salesforce Apex Test first as requested; keep the remaining projects alphabetized. -->
+            <ul class="navbar-nav ml-auto nav-group" aria-label="Site pages">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="projects-menu" aria-haspopup="true" aria-expanded="false">Projects</button>
+                    <div class="dropdown-menu" aria-labelledby="projects-menu">
+                        <!-- Separate the featured Salesforce project from the alphabetical project list. -->
+                        <a class="dropdown-item" href="/Projects/salesforce-apex-overview/dist/index.html">Salesforce Apex Test</a>
+                        <div class="dropdown-divider" role="separator"></div>
+                        <a class="dropdown-item" href="/Projects/imageGenetic3d/imageGenetic3d.html">3D Image Genetic Algorithm</a>
+                        <a class="dropdown-item" href="/Projects/antColony/antColony.html">Ant Colony Path Algorithm</a>
+                        <a class="dropdown-item" href="/Projects/BoidsV2/BoidsV2.html">Boids</a>
+                        <a class="dropdown-item" href="/Projects/BoidsBulkV3/BoidsBulkV3.html">BoidsBulkV3</a>
+                        <a class="dropdown-item" href="/Projects/checkers/checkers.html">Checkers</a>
+                        <a class="dropdown-item" href="/Projects/chess/chess.html">Chess</a>
+                        <a class="dropdown-item" href="/Projects/cityGenerator/cityGenerator.html">cityGenerator</a>
+                        <a class="dropdown-item" href="/Projects/crowd/crowd.html">Crowd</a>
+                        <a class="dropdown-item" href="/Projects/gameOfLifeV2/gameOfLifeV2.html">Game of Life</a>
+                        <a class="dropdown-item" href="/Projects/geneticAlgorithm/geneticAlgorithm.html">Genetic Algorithm</a>
+                        <!-- Keep Go discoverable alongside the other project entries. -->
+                        <a class="dropdown-item" href="/Projects/go-ai/dist/index.html">Go AI Lab</a>
+                        <a class="dropdown-item" href="/Projects/lSystemV2/lSystemV2.html">L-System</a>
+                        <a class="dropdown-item" href="/Projects/mapGenerator/mapGenerator.html">Map Generator</a>
+                        <a class="dropdown-item" href="/Projects/tarjan/tarjan.html">Tarjan's Algorithm</a>
+                        <a class="dropdown-item" href="/Projects/tetris/tetris.html">Tetris</a>
+                        <a class="dropdown-item" href="/Projects/voronoi/voronoi.html">Voronoï</a>
+                        <a class="dropdown-item" href="/Projects/warSimulator/warSimulator.html">War Simulator</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-group nav-group-separated" aria-label="Personal">
+                <li class="nav-item"><a class="nav-link" href="/oleg.html">Meet Oleg</a></li>
+            </ul>
+            <ul class="navbar-nav nav-group nav-group-separated" aria-label="Contact and social profiles">
+                <li class="nav-item"><button class="nav-link nav-copy-email" id="copy-email" type="button" aria-label="Copy email address louis.dbeux@gmail.com">louis.dbeux@gmail.com</button></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/Sparadrax" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fr.linkedin.com/in/louis-du-beux-621743a5" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Announce clipboard results without moving keyboard focus. -->
+    <div id="email-copy-notification" class="email-copy-notification" role="status" aria-live="polite" aria-atomic="true"></div>
+</header>

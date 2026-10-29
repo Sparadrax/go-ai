@@ -1,0 +1,91 @@
+/* Shared navigation layout keeps the navbar visible above scrolling page content. */
+
+/* Stick the outer placeholder so the loaded header's parent does not limit scrolling. */
+#nav-placeholder {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    flex-shrink: 0;
+}
+
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e1e7eb;
+}
+.site-header .navbar { min-height: 72px; }
+.site-header .navbar-brand { color: #182735; font-weight: 600; }
+.site-header .nav-link { font-size: .9rem; font-weight: 500; }
+.site-header .nav-link:hover, .site-header .nav-link:focus { color: #126779; }
+.site-header a:focus-visible, .site-header button:focus-visible {
+    outline: 3px solid #72ddd0;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+@media (min-width: 992px) {
+    .site-header .navbar-nav .nav-link { padding-left: .85rem; padding-right: .85rem; }
+}
+@media (max-width: 991.98px) {
+    .site-header .navbar-collapse { padding: .75rem 0; }
+}
+
+/* Long project menus remain reachable on short screens while the navbar stays pinned. */
+.site-header .dropdown-menu {
+    max-height: calc(100vh - 90px);
+    max-height: calc(100dvh - 90px);
+    overflow-y: auto;
+}
+
+@media (max-width: 991.98px) {
+    .site-header .navbar-collapse {
+        max-height: calc(100vh - 73px);
+        max-height: calc(100dvh - 73px);
+        overflow-y: auto;
+    }
+}
+
+/* Separate site navigation, personal content, and contact profiles without extra labels. */
+@media (min-width: 992px) {
+    .site-header .nav-group-separated {
+        margin-left: 0.75rem;
+        padding-left: 0.75rem;
+        border-left: 1px solid var(--site-border);
+    }
+}
+
+/* Stack the same groups with horizontal separators in the collapsed mobile menu. */
+@media (max-width: 991.98px) {
+    .site-header .nav-group-separated {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--site-border);
+    }
+}
+
+/* Keep the email selectable and match the pointer cursor used by navbar links. */
+.site-header .nav-copy-email {
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+    text-align: left;
+    user-select: text;
+    cursor: pointer;
+}
+
+/* Keep clipboard feedback above page content, including the collapsed mobile menu. */
+.email-copy-notification {
+    position: fixed;
+    top: 84px;
+    right: 1rem;
+    max-width: calc(100vw - 2rem);
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--site-accent);
+    border-radius: 8px;
+    background: var(--site-surface);
+    color: var(--site-accent);
+    pointer-events: none;
+    z-index: 1080;
+}
+
+.email-copy-notification:empty {
+    display: none;
+}

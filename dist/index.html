@@ -4,12 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#172b27">
+    <meta name="theme-color" content="#0b1220">
     <title>Goban — Go AI Lab</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/Lib/Bootstrap4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/NavBar.css">
+    <link rel="stylesheet" href="style.css?v=site-theme-1">
+    <!-- Load the shared palette last so the project follows the main site theme. -->
+    <link rel="stylesheet" href="/Theme.css">
+    <script src="/NavBar.js" defer></script>
 </head>
 <body>
-    <header><a class="brand" href="./"><span class="brand-icon">●<i>○</i></span> goban<span class="brand-divider"></span><small>GO AI LAB</small></a><span class="header-note">An ancient game. A new opponent.</span><button id="rulesButton" class="quiet">How to play <span>↗</span></button></header>
+    <!-- The site navigation comes from the shared fragment, never duplicated markup. -->
+    <div id="nav-placeholder"></div>
+    <header class="app-header"><a class="brand" href="./"><span class="brand-icon">●<i>○</i></span> goban<span class="brand-divider"></span><small>GO AI LAB</small></a><span class="header-note">An ancient game. A new opponent.</span><button id="rulesButton" class="quiet">How to play <span>↗</span></button></header>
     <main>
         <div class="page-heading"><div><div class="eyebrow">THE INTERSECTION OF PLAY & ALGORITHMS</div><h1>A little strategy.<br>A different kind of mind.</h1><p>Take a seat. Choose an algorithm. Find your next move.</p></div><div class="lab-mark"><span>囲</span><small>THE GAME OF GO</small></div></div>
         <div class="workspace">
