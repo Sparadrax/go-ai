@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- Goban provides a local Go playing surface and configurable algorithm laboratory. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#172b27">
+    <title>Goban — Go AI Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><a class="brand" href="./"><span class="brand-icon">●<i>○</i></span> goban<span class="brand-divider"></span><small>GO AI LAB</small></a><span class="header-note">An ancient game. A new opponent.</span><button id="rulesButton" class="quiet">How to play <span>↗</span></button></header>
+    <main>
+        <div class="page-heading"><div><div class="eyebrow">THE INTERSECTION OF PLAY & ALGORITHMS</div><h1>A little strategy.<br>A different kind of mind.</h1><p>Take a seat. Choose an algorithm. Find your next move.</p></div><div class="lab-mark"><span>囲</span><small>THE GAME OF GO</small></div></div>
+        <div class="workspace">
+            <section class="play-panel">
+                <div class="panel-top"><div><span class="live-dot"></span><strong id="status">Your move</strong><span class="muted" id="turnInfo">You are playing black</span></div><span class="board-label" id="boardLabel">9 × 9 BOARD</span></div>
+                <div class="board-wrap"><div id="board" role="grid" aria-label="Go board"></div></div>
+                <div class="players"><div class="player"><span class="stone black"></span><div><strong>You <small>BLACK</small></strong><span id="blackCaptures">0 captures</span></div><span class="turn-badge" id="blackTurn">TO PLAY</span></div><div class="versus">vs</div><div class="player"><span class="stone white"></span><div><strong id="opponentName">Minimax <small>WHITE</small></strong><span id="whiteCaptures">0 captures</span></div><span class="ai-badge">AI</span></div></div>
+                <div class="game-actions"><button id="pass">Pass turn <span>→</span></button><button id="undo">↶ &nbsp; Undo</button><button id="newGame" class="new-game">↻ &nbsp; New game</button></div>
+                <div class="board-foot"><span id="moveCount">MOVE 0</span><span>Chinese area scoring <b>·</b> Komi 6.5 <b>·</b> No suicide</span></div>
+            </section>
+            <aside>
+                <section class="settings-panel"><div class="section-title"><h2>Your opponent</h2><span>01 — AI SETUP</span></div><label for="algorithm">ALGORITHM</label><select id="algorithm"><option value="minimax">Minimax + Alpha–Beta</option><option value="mcts">Monte Carlo Tree Search</option><option value="greedy">Greedy Heuristic</option><option value="random">Random Baseline</option></select><div class="algorithm-info"><div class="info-title"><span id="algorithmTag">TREE SEARCH</span><span>↗</span></div><h3 id="algorithmTitle">Thinking a few moves ahead.</h3><p id="algorithmDescription"></p><div class="info-meta"><span>STYLE <strong id="styleTag">Tactical</strong></span><span>COMPLEXITY <strong id="complexityTag">O(bᵈ)</strong></span></div></div><div class="section-title parameters"><h2>Fine-tune its mind</h2><span>PARAMETERS</span></div><div id="parameters"></div><p class="parameter-note" id="parameterNote"></p><div class="setting-row"><label for="boardSize">BOARD SIZE</label><select id="boardSize"><option value="9">9 × 9 · Quick game</option><option value="13">13 × 13 · Balanced</option><option value="19">19 × 19 · Full board</option></select></div><p class="small-note">Board changes start a new game. AI settings apply to its next move.</p></section>
+                <section class="insight"><span class="insight-icon">✧</span><div><h3>A game of space, not stones.</h3><p>Surround territory. Keep your groups connected. Every intersection is a possibility.</p><button id="learn">Learn the basics →</button></div></section>
+            </aside>
+        </div>
+        <section class="activity"><div><span class="live-dot"></span><strong>Inside the algorithm</strong><span class="muted">A glimpse into your opponent’s last decision</span></div><p id="analysis">Play your first stone to see the AI in action.</p><div id="metrics"></div></section>
+        <footer><span>GOBAN <b>/</b> A PLAYGROUND FOR CURIOUS MINDS</span><span>Human intuition meets machine exploration.</span></footer>
+    </main>
+    <dialog id="rules"><button id="closeRules" class="close">×</button><div class="eyebrow">A QUICK INTRODUCTION</div><h2>Simple rules. Endless possibilities.</h2><p>You play black and move first. Place a stone on an empty intersection. Stones connected horizontally or vertically form a group.</p><p><strong>Liberties:</strong> adjacent empty intersections keep a group alive. A group with no liberties is captured. You cannot play a move that leaves your own group without liberties unless it captures opponents.</p><p><strong>Repetition:</strong> a move cannot recreate an earlier board position (positional superko). Pass when you have no useful moves; two consecutive passes end the game.</p><p><strong>Scoring:</strong> your stones plus empty territory surrounded only by your color count as your area. White receives 6.5 komi. Remove dead groups through play before passing; this app does not adjudicate dead stones or seki.</p><p><strong>The AI lab:</strong> these are educational, browser-based opponents, not professional Go engines. Minimax uses a restricted candidate set; MCTS uses short rollouts. Larger boards are more challenging for both.</p></dialog>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
