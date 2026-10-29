@@ -17,7 +17,7 @@
                 <div class="panel-top"><div><span class="live-dot"></span><strong id="status">Your move</strong><span class="muted" id="turnInfo">You are playing black</span></div><span class="board-label" id="boardLabel">9 × 9 BOARD</span></div>
                 <div class="board-wrap"><div id="board" role="grid" aria-label="Go board"></div></div>
                 <div class="players"><div class="player"><span class="stone black"></span><div><strong>You <small>BLACK</small></strong><span id="blackCaptures">0 captures</span></div><span class="turn-badge" id="blackTurn">TO PLAY</span></div><div class="versus">vs</div><div class="player"><span class="stone white"></span><div><strong id="opponentName">Minimax <small>WHITE</small></strong><span id="whiteCaptures">0 captures</span></div><span class="ai-badge">AI</span></div></div>
-                <div class="game-actions"><button id="pass">Pass turn <span>→</span></button><button id="undo">↶ &nbsp; Undo</button><button id="newGame" class="new-game">↻ &nbsp; New game</button></div>
+                <div class="game-actions"><button id="pass">Pass turn <span>→</span></button><button id="resign">Resign</button><button id="undo">↶ &nbsp; Undo</button><button id="newGame" class="new-game">↻ &nbsp; New game</button></div>
                 <div class="board-foot"><span id="moveCount">MOVE 0</span><span>Chinese area scoring <b>·</b> Komi 6.5 <b>·</b> No suicide</span></div>
             </section>
             <aside>
@@ -28,6 +28,16 @@
         <section class="activity"><div><span class="live-dot"></span><strong>Inside the algorithm</strong><span class="muted">A glimpse into your opponent’s last decision</span></div><p id="analysis">Play your first stone to see the AI in action.</p><div id="metrics"></div></section>
         <footer><span>GOBAN <b>/</b> A PLAYGROUND FOR CURIOUS MINDS</span><span>Human intuition meets machine exploration.</span></footer>
     </main>
+    <!-- Present the result explicitly and keep restart available after a loss or win. -->
+    <dialog id="gameOver" aria-labelledby="resultTitle">
+        <div class="eyebrow">GAME OVER</div>
+        <h2 id="resultTitle">You lost</h2>
+        <p id="resultDescription"></p>
+        <div class="result-actions">
+            <button id="restartGame">Restart game</button>
+            <button id="reviewGame">Review board</button>
+        </div>
+    </dialog>
     <dialog id="rules"><button id="closeRules" class="close">×</button><div class="eyebrow">A QUICK INTRODUCTION</div><h2>Simple rules. Endless possibilities.</h2><p>You play black and move first. Place a stone on an empty intersection. Stones connected horizontally or vertically form a group.</p><p><strong>Liberties:</strong> adjacent empty intersections keep a group alive. A group with no liberties is captured. You cannot play a move that leaves your own group without liberties unless it captures opponents.</p><p><strong>Repetition:</strong> a move cannot recreate an earlier board position (positional superko). Pass when you have no useful moves; two consecutive passes end the game.</p><p><strong>Scoring:</strong> your stones plus empty territory surrounded only by your color count as your area. White receives 6.5 komi. Remove dead groups through play before passing; this app does not adjudicate dead stones or seki.</p><p><strong>The AI lab:</strong> these are educational, browser-based opponents, not professional Go engines. Minimax uses a restricted candidate set; MCTS uses short rollouts. Larger boards are more challenging for both.</p></dialog>
     <script type="module" src="app.js"></script>
 </body>

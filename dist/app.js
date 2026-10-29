@@ -88,6 +88,7 @@ function render() {
     $('moveCount').textContent = `MOVE ${state.moves}`;
     $('boardLabel').textContent = `${size} × ${size} BOARD`;
     $('pass').disabled = thinking || state.over || state.turn !== 1;
+    $('resign').disabled = state.over;
     $('undo').disabled = !snapshots.length;
     $('blackTurn').textContent = thinking ? 'WAITING' : state.over ? 'FINISHED' : 'TO PLAY';
     $('algorithm').disabled = thinking;
@@ -99,6 +100,7 @@ function render() {
  * @returns Resets all board state, history, and analysis.
  */
 function reset() {
+    $('gameOver').close();
     worker?.terminate();
     thinking = false;
     size = Number($('boardSize').value);
@@ -129,13 +131,32 @@ function commit(index) {
     state.turn = 3 - state.turn;
     last = index;
     if (state.passes === 2) {
-        state.over = true;
-        const totals = score(state.board, size);
-        $('status').textContent = totals.black > totals.white ? 'You win!' : 'White wins';
-        $('turnInfo').textContent = `Black ${totals.black} · White ${totals.white}`;
-        $('analysis').textContent = 'Both players passed. Final area score includes 6.5 komi for white.';
+        finishGame('score');
     }
     return true;
+}
+/** End play and show the result with restart and board review actions.
+ *
+ * @param reason - Either score after two passes or resignation by the human.
+ * @returns Stops the AI, locks play, and opens the result dialog.
+ */
+function finishGame(reason) {
+    worker?.terminate();
+    thinking = false;
+    state.over = true;
+    const totals = score(state.board, size);
+    const lost = reason === 'resignation' || totals.white > totals.black;
+    const title = lost ? 'You lost' : 'You won!';
+    const description = reason === 'resignation'
+        ? 'You resigned. White wins. Restart to try again with the same board size and AI settings.'
+        : `Both players passed. Black: ${totals.black}. White: ${totals.white}, including 6.5 komi. ${lost ? 'White' : 'Black'} wins by ${Math.abs(totals.white - totals.black)} points.`;
+    $('status').textContent = title;
+    $('turnInfo').textContent = reason === 'resignation' ? 'White wins by resignation' : `Black ${totals.black} · White ${totals.white}`;
+    $('analysis').textContent = description;
+    $('resultTitle').textContent = title;
+    $('resultDescription').textContent = description;
+    render();
+    $('gameOver').showModal();
 }
 /** Record a human turn and launch an off-thread AI reply.
  *
@@ -190,11 +211,17 @@ function humanMove(index) {
 $('algorithm').addEventListener('change', configure);
 $('boardSize').addEventListener('change', reset);
 $('newGame').addEventListener('click', reset);
+$('restartGame').addEventListener('click', reset);
+$('reviewGame').addEventListener('click', () => $('gameOver').close());
+$('resign').addEventListener('click', () => {
+    if (!state.over) finishGame('resignation');
+});
 $('pass').addEventListener('click', () => humanMove(-1));
 $('undo').addEventListener('click', () => {
     if (!snapshots.length) return;
     worker?.terminate();
     thinking = false;
+    $('gameOver').close();
     const snapshot = snapshots.pop();
     state = snapshot.state;
     last = snapshot.last;
