@@ -1,5 +1,10 @@
 /* Coordinate the Go interface, game history, configurable AI, and worker lifecycle. */
 import { play, score } from './engine.js';
+/** Find an interface element by its stable identifier.
+ *
+ * @param id - Element identifier.
+ * @returns Matching DOM element.
+ */
 const $ = id => document.getElementById(id);
 const definitions = {
     minimax: { name: 'Minimax', tag: 'TREE SEARCH', title: 'Thinking a few moves ahead.', description: 'Explores possible moves and your best responses. Alpha–beta pruning skips branches that cannot improve the outcome.', style: 'Tactical', complexity: 'O(bᵈ)', note: 'Deeper search looks further ahead. Search is capped at about 2 seconds; completed depth is reported below.', controls: [['depth', 'Search depth', 1, 4, 1, 2, 'Quick', 'Thorough'], ['breadth', 'Candidate moves per node', 4, 16, 1, 8, 'Focused', 'Broad']] },
